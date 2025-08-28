@@ -134,11 +134,15 @@ class CoreService {
           const serverWin = typeof battleData.win === 'number' ? battleData.win : -1;
           const finalWin = serverWin !== -1 ? serverWin : localWin;
           
+          const finalMapName = (existingBattle?.mapName && existingBattle.mapName !== 'Unknown Map') 
+          ? existingBattle.mapName 
+          : (battleData.mapName || 'Unknown Map');
+
           normalized[arenaId] = {
             startTime: battleData.startTime || (existingBattle?.startTime) || Date.now(),
             duration: finalDuration,
             win: finalWin,
-            mapName: battleData.mapName || (existingBattle?.mapName) || 'Unknown Map',
+            mapName: finalMapName,
             players
           };
         });
