@@ -969,8 +969,11 @@ class CoreService {
     this.BattleStats[arenaId].duration = result.common.duration;
 
     if (result.common.arenaTag) {
+    const currentMapName = this.BattleStats[arenaId].mapName;
+    if (!currentMapName || currentMapName === 'Unknown Map' || currentMapName === '') {
       this.BattleStats[arenaId].mapName = result.common.arenaTag;
     }
+}
 
     const playerTeam = Number(result.players[this.curentPlayerId].team);
     const winnerTeam = Number(result.common.winnerTeam);
