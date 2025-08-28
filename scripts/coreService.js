@@ -243,9 +243,7 @@ class CoreService {
     this.calculationCache.clear();
   }
 
-  // Очищаємо тільки кеш поточного бою, зберігаючи кеш найкращого/найгіршого
   clearCurrentBattleCache() {
-    // Видаляємо тільки кеші поточного бою
     const keysToDelete = [];
     for (const key of this.calculationCache.keys()) {
       if (key.startsWith(`battle_${this.curentArenaId}`) || 
@@ -256,8 +254,6 @@ class CoreService {
     }
     keysToDelete.forEach(key => this.calculationCache.delete(key));
   }
-
-  // Очищаємо кеш найкращого/найгіршого бою при зміні завершених боїв  
   clearBestWorstCache() {
     const keysToDelete = [];
     for (const key of this.calculationCache.keys()) {
@@ -852,6 +848,7 @@ class CoreService {
     this.initializeBattleStats(this.curentArenaId, this.curentPlayerId);
 
     this.BattleStats[this.curentArenaId].mapName = arenaData.localizedName || 'Unknown Map';
+    console.log('Current Arena ID:', this.curentArenaId, 'Map Name:', this.BattleStats[this.curentArenaId].mapName);
     this.BattleStats[this.curentArenaId].players[this.curentPlayerId].vehicle = this.curentVehicle;
     this.BattleStats[this.curentArenaId].players[this.curentPlayerId].name = this.sdk.data.player.name.value;
 
